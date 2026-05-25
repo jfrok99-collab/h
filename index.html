@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heart Design</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Padauk:wght@700&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #f4f5f7;
+            overflow: hidden;
+        }
+
+        /* MAIN CARD */
+        .card {
+            width: 255px;
+            height: 255px;
+            border: 2px solid white;
+            position: relative;
+            background: #db0d2c;
+            overflow: hidden;
+            border-radius: 10px;
+        }
+
+        /* TOP TEXT */
+        .top-text {
+            position: absolute;
+            top: 8px;
+            width: 100%;
+            text-align: center;
+            color: rgb(245, 236, 236);
+            font-size: 14px;
+            font-weight: bold;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            z-index: 10;
+        }
+
+        /* BIG HEART */
+        .big-heart {
+            position: absolute;
+            width: 120px;
+            height: 120px;
+            background: white;
+            top: 95px;
+            left: 67px;
+            transform: rotate(-45deg);
+            box-shadow: 0 15px 20px rgba(0, 0, 0, 0.18);
+        }
+
+        /* HEART SHAPES */
+        .big-heart::before,
+        .big-heart::after {
+            content: "";
+            position: absolute;
+            width: 120px;
+            height: 120px;
+            background: white;
+            border-radius: 50%;
+        }
+
+        .big-heart::before {
+            top: -60px;
+            left: 0;
+        }
+
+        .big-heart::after {
+            top: 0;
+            left: 60px;
+        }
+
+        /* NAME TEXT FIXED */
+        .name {
+            position: absolute;
+            top: 42%;
+            /* ⬅ moved slightly up */
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(45deg);
+
+            color: red;
+            font-size: 28px;
+            font-weight: 900;
+            /* ⬅ bold */
+            font-family: "Padauk", sans-serif;
+
+            white-space: nowrap;
+            z-index: 50;
+            /* ⬅ always above fade */
+
+            text-shadow: 1px 1px 0 white;
+        }
+
+        /* REMOVE COVER ISSUE (FADE FIX) */
+        .big-heart::before,
+        .big-heart::after {
+            z-index: 1;
+        }
+
+        /* FLYING HEARTS */
+        .flying-heart {
+            position: absolute;
+            pointer-events: none;
+            z-index: 1;
+            opacity: 0.85;
+        }
+
+        /* ANIMATIONS */
+        @keyframes fly1 {
+            from {
+                transform: translate(-200px, -200px);
+                opacity: 1;
+            }
+
+            to {
+                transform: translate(120vw, 120vh);
+                opacity: 0;
+            }
+        }
+
+        @keyframes fly2 {
+            from {
+                transform: translate(120vw, -200px);
+                opacity: 1;
+            }
+
+            to {
+                transform: translate(-120vw, 120vh);
+                opacity: 0;
+            }
+        }
+
+        @keyframes fly3 {
+            from {
+                transform: translate(-200px, 120vh);
+                opacity: 1;
+            }
+
+            to {
+                transform: translate(120vw, -120vh);
+                opacity: 0;
+            }
+        }
+
+        @keyframes fly4 {
+            from {
+                transform: translate(120vw, 120vh);
+                opacity: 1;
+            }
+
+            to {
+                transform: translate(-120vw, -120vh);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="card">
+
+        <div class="top-text">
+            YOU ARE ALWAYS IN MY<br>
+            HEART
+        </div>
+
+        <div class="big-heart">
+
+            <div class="name">
+                <h2>💖 Myat 💖</h2>
+            </div>
+
+        </div>
+
+    </div>
+
+    <script>
+
+        const hearts = ["❤️", "💖", "💕", "💘", "💝", "💞", "🩷"];
+        const animations = ["fly1", "fly2", "fly3", "fly4"];
+
+        function createHeart() {
+
+            const heart = document.createElement("div");
+            heart.classList.add("flying-heart");
+
+            heart.innerHTML = hearts[Math.floor(Math.random() * hearts.length)];
+
+            heart.style.fontSize = (15 + Math.random() * 30) + "px";
+            heart.style.left = Math.random() * 100 + "vw";
+            heart.style.top = Math.random() * 100 + "vh";
+
+            heart.style.animation = animations[Math.floor(Math.random() * animations.length)] +
+                " " + (4 + Math.random() * 5) + "s linear";
+
+            document.body.appendChild(heart);
+
+            setTimeout(() => heart.remove(), 9000);
+        }
+
+        /* fast start */
+        for (let i = 0; i < 35; i++) createHeart();
+
+        /* continuous */
+        setInterval(createHeart, 120);
+
+    </script>
+
+</body>
+
+</html>
