@@ -26,8 +26,8 @@
 
         /* MAIN CARD */
         .card {
-            width: 255px;
-            height: 255px;
+            width: 310px;
+            height: 310px;
             border: 2px solid white;
             position: relative;
             background: #db0d2c;
@@ -35,78 +35,71 @@
             border-radius: 10px;
         }
 
-        /* TOP TEXT */
+        /* TOP TEXT (LOWER + BIGGER) */
         .top-text {
             position: absolute;
-            top: 8px;
+            top: 25px;
+            /* moved a little down */
             width: 100%;
             text-align: center;
             color: rgb(245, 236, 236);
-            font-size: 14px;
+            font-size: 16px;
+            /* a little bigger */
             font-weight: bold;
             letter-spacing: 2px;
             text-transform: uppercase;
+            white-space: nowrap;
             z-index: 10;
         }
 
-        /* BIG HEART */
+        /* HEART (UNCHANGED SIZE) */
         .big-heart {
             position: absolute;
-            width: 120px;
-            height: 120px;
+            width: 100px;
+            height: 100px;
             background: white;
-            top: 95px;
-            left: 67px;
+            top: 120px;
+            left: 105px;
             transform: rotate(-45deg);
             box-shadow: 0 15px 20px rgba(0, 0, 0, 0.18);
         }
 
-        /* HEART SHAPES */
         .big-heart::before,
         .big-heart::after {
             content: "";
             position: absolute;
-            width: 120px;
-            height: 120px;
+            width: 100px;
+            height: 100px;
             background: white;
             border-radius: 50%;
+            z-index: 1;
         }
 
         .big-heart::before {
-            top: -60px;
+            top: -50px;
             left: 0;
         }
 
         .big-heart::after {
             top: 0;
-            left: 60px;
+            left: 50px;
         }
 
-        /* NAME TEXT FIXED */
+        /* NAME */
         .name {
             position: absolute;
             top: 42%;
-            /* ⬅ moved slightly up */
             left: 50%;
             transform: translate(-50%, -50%) rotate(45deg);
 
             color: red;
-            font-size: 28px;
+            font-size: 26px;
             font-weight: 900;
-            /* ⬅ bold */
             font-family: "Padauk", sans-serif;
 
             white-space: nowrap;
             z-index: 50;
-            /* ⬅ always above fade */
-
             text-shadow: 1px 1px 0 white;
-        }
-
-        /* REMOVE COVER ISSUE (FADE FIX) */
-        .big-heart::before,
-        .big-heart::after {
-            z-index: 1;
         }
 
         /* FLYING HEARTS */
@@ -117,7 +110,6 @@
             opacity: 0.85;
         }
 
-        /* ANIMATIONS */
         @keyframes fly1 {
             from {
                 transform: translate(-200px, -200px);
@@ -173,16 +165,13 @@
     <div class="card">
 
         <div class="top-text">
-            YOU ARE ALWAYS IN MY<br>
-            HEART
+            YOU ARE ALWAYS IN MY HEART
         </div>
 
         <div class="big-heart">
-
             <div class="name">
                 <h2>💖 Myat 💖</h2>
             </div>
-
         </div>
 
     </div>
@@ -193,7 +182,6 @@
         const animations = ["fly1", "fly2", "fly3", "fly4"];
 
         function createHeart() {
-
             const heart = document.createElement("div");
             heart.classList.add("flying-heart");
 
@@ -203,7 +191,8 @@
             heart.style.left = Math.random() * 100 + "vw";
             heart.style.top = Math.random() * 100 + "vh";
 
-            heart.style.animation = animations[Math.floor(Math.random() * animations.length)] +
+            heart.style.animation =
+                animations[Math.floor(Math.random() * animations.length)] +
                 " " + (4 + Math.random() * 5) + "s linear";
 
             document.body.appendChild(heart);
@@ -211,10 +200,7 @@
             setTimeout(() => heart.remove(), 9000);
         }
 
-        /* fast start */
         for (let i = 0; i < 35; i++) createHeart();
-
-        /* continuous */
         setInterval(createHeart, 120);
 
     </script>
