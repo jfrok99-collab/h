@@ -20,7 +20,8 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            background: #f4f5f7;
+            background: white;
+            /* CHANGED TO WHITE */
             overflow: hidden;
         }
 
@@ -28,23 +29,21 @@
         .card {
             width: 310px;
             height: 310px;
-            border: 2px solid white;
+            border: 2px solid #eee;
             position: relative;
             background: #db0d2c;
             overflow: hidden;
             border-radius: 10px;
         }
 
-        /* TOP TEXT (LOWER + BIGGER) */
+        /* TOP TEXT */
         .top-text {
             position: absolute;
             top: 25px;
-            /* moved a little down */
             width: 100%;
             text-align: center;
             color: rgb(245, 236, 236);
-            font-size: 16px;
-            /* a little bigger */
+            font-size: 18px;
             font-weight: bold;
             letter-spacing: 2px;
             text-transform: uppercase;
@@ -52,7 +51,7 @@
             z-index: 10;
         }
 
-        /* HEART (UNCHANGED SIZE) */
+        /* HEART */
         .big-heart {
             position: absolute;
             width: 100px;
@@ -187,21 +186,23 @@
 
             heart.innerHTML = hearts[Math.floor(Math.random() * hearts.length)];
 
-            heart.style.fontSize = (15 + Math.random() * 30) + "px";
+            heart.style.fontSize = (14 + Math.random() * 25) + "px";
             heart.style.left = Math.random() * 100 + "vw";
             heart.style.top = Math.random() * 100 + "vh";
 
             heart.style.animation =
                 animations[Math.floor(Math.random() * animations.length)] +
-                " " + (4 + Math.random() * 5) + "s linear";
+                " " + (5 + Math.random() * 4) + "s linear";
 
             document.body.appendChild(heart);
 
             setTimeout(() => heart.remove(), 9000);
         }
 
-        for (let i = 0; i < 35; i++) createHeart();
-        setInterval(createHeart, 120);
+        /* REDUCED HEART COUNT */
+        for (let i = 0; i < 15; i++) createHeart();  // was 35 → now 15
+
+        setInterval(createHeart, 250);  // slower spawning
 
     </script>
 
