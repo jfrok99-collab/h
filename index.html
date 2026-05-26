@@ -4,202 +4,424 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Heart Design</title>
+    <title>အဖြေမှန်ကိုရွေးပါ</title>
 
-    <link href="https://fonts.googleapis.com/css2?family=Padauk:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
 
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
         }
 
         body {
-            height: 100vh;
+            min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            background: rgb(238, 12, 12);
-            overflow: hidden;
+            background: linear-gradient(135deg, #ff758c, #ff7eb3, #a18cd1, #84fab0);
+            padding: 20px;
         }
 
-        /* CARD */
-        .card {
-            width: 310px;
-            height: 310px;
-            border: 2px solid #eee;
-            position: relative;
-            background: #e7e2e3;
-            overflow: hidden;
-            border-radius: 10px;
-        }
-
-        /* TOP TEXT */
-        .top-text {
-            position: absolute;
-            top: 25px;
+        .container {
             width: 100%;
+            max-width: 900px;
+        }
+
+        .page {
+            display: none;
+            animation: fade 0.5s ease;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        @keyframes fade {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(15px);
+            border-radius: 30px;
+            padding: 35px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .topic {
             text-align: center;
-            color: rgb(10, 14, 224);
-            font-size: 18px;
-            font-weight: bold;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            white-space: nowrap;
-            z-index: 10;
+            color: white;
+            font-size: 38px;
+            font-weight: 700;
+            margin-bottom: 30px;
         }
 
-        /* HEART */
-        .big-heart {
-            position: absolute;
-            width: 100px;
-            height: 100px;
-            background: rgb(223, 15, 15);
-            top: 120px;
-            left: 105px;
-            transform: rotate(-45deg);
-            box-shadow: 0 15px 20px rgba(0, 0, 0, 0.18);
-        }
-
-        .big-heart::before,
-        .big-heart::after {
-            content: "";
-            position: absolute;
-            width: 100px;
-            height: 100px;
-            background: rgb(228, 12, 12);
-            border-radius: 50%;
-        }
-
-        .big-heart::before {
-            top: -50px;
-            left: 0;
-        }
-
-        .big-heart::after {
-            top: 0;
-            left: 50px;
-        }
-
-        /* NAME */
-        .name {
-            position: absolute;
-            top: 42%;
-            left: 50%;
-            transform: translate(-50%, -50%) rotate(45deg);
-
-            color: rgb(18, 32, 221);
+        .question {
+            text-align: center;
+            color: white;
             font-size: 26px;
-            font-weight: 900;
-            font-family: "Padauk", sans-serif;
-
-            white-space: nowrap;
-            z-index: 50;
-            text-shadow: 1px 1px 0 white;
+            margin-top: 30px;
+            font-weight: 600;
         }
 
-        /* FLYING HEARTS */
-        .flying-heart {
-            position: absolute;
-            pointer-events: none;
-            z-index: 1;
-            opacity: 0.85;
+        .photo-box {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
         }
 
-        @keyframes fly1 {
-            from {
-                transform: translate(-200px, -200px);
-                opacity: 1;
-            }
-
-            to {
-                transform: translate(120vw, 120vh);
-                opacity: 0;
-            }
+        .choice {
+            background: rgba(255, 255, 255, 0.12);
+            padding: 20px;
+            border-radius: 25px;
+            text-align: center;
+            transition: 0.4s;
         }
 
-        @keyframes fly2 {
-            from {
-                transform: translate(120vw, -200px);
-                opacity: 1;
-            }
-
-            to {
-                transform: translate(-120vw, 120vh);
-                opacity: 0;
-            }
+        .choice:hover {
+            transform: translateY(-8px);
         }
 
-        @keyframes fly3 {
-            from {
-                transform: translate(-200px, 120vh);
-                opacity: 1;
-            }
-
-            to {
-                transform: translate(120vw, -120vh);
-                opacity: 0;
-            }
+        .choice img {
+            width: 100%;
+            height: 260px;
+            object-fit: cover;
+            border-radius: 20px;
+            border: 4px solid rgba(255, 255, 255, 0.4);
         }
 
-        @keyframes fly4 {
-            from {
-                transform: translate(120vw, 120vh);
-                opacity: 1;
+        .btn {
+            width: 100%;
+            margin-top: 18px;
+            padding: 15px;
+            border: none;
+            border-radius: 50px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            color: white;
+            background: linear-gradient(135deg, #ff416c, #ff4b2b);
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            transform: scale(1.06);
+        }
+
+        .message {
+            margin-top: 18px;
+            text-align: center;
+            font-size: 20px;
+            font-weight: 700;
+            color: yellow;
+        }
+
+        .finish {
+            text-align: center;
+            color: white;
+        }
+
+        .finish h1 {
+            font-size: 60px;
+            margin-bottom: 20px;
+        }
+
+        .finish p {
+            font-size: 24px;
+            line-height: 1.6;
+        }
+
+        .restart-btn {
+            margin-top: 30px;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 50px;
+            background: white;
+            color: #ff4b7d;
+            font-size: 20px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .restart-btn:hover {
+            transform: scale(1.08);
+        }
+
+        /* MOBILE STYLE */
+
+        @media(max-width:768px) {
+
+            .photo-box {
+                grid-template-columns: 1fr 1fr;
+                gap: 12px;
             }
 
-            to {
-                transform: translate(-120vw, -120vh);
-                opacity: 0;
+            .topic {
+                font-size: 24px;
             }
+
+            .question {
+                font-size: 18px;
+            }
+
+            .choice {
+                padding: 10px;
+            }
+
+            .choice img {
+                height: 150px;
+            }
+
+            .btn {
+                font-size: 14px;
+                padding: 10px;
+            }
+
+            .card {
+                padding: 18px;
+            }
+
+            .finish h1 {
+                font-size: 40px;
+            }
+
+            .finish p {
+                font-size: 18px;
+            }
+
         }
     </style>
 </head>
 
 <body>
 
-    <div class="card">
+    <div class="container">
 
-        <div class="top-text">
-            <h5> YOU ARE ALWAYS IN MY HEART</h5>
+        <!-- PAGE 1 -->
+        <div class="page active" id="page1">
+
+            <div class="card">
+
+                <div class="topic">အဖြေမှန်ကိုရွေးပါ</div>
+
+                <div class="photo-box">
+
+                    <!-- WRONG -->
+                    <div class="choice">
+                        <img src="1.jpg">
+
+                        <button class="btn" onclick="wrongAnswer('msg1')">
+                            Choose
+                        </button>
+                    </div>
+
+                    <!-- CORRECT -->
+                    <div class="choice">
+                        <img src="2.jpg">
+
+                        <button class="btn" onclick="nextPage(2)">
+                            Choose
+                        </button>
+                    </div>
+
+                </div>
+
+                <div class="question">
+                    အရံလူကိုရွေးပါ
+                </div>
+
+                <div class="message" id="msg1"></div>
+
+            </div>
+
         </div>
 
-        <div class="big-heart">
-            <div class="name">
-                <h2>💖 Myat 💖</h2>
+        <!-- PAGE 2 -->
+        <div class="page" id="page2">
+
+            <div class="card">
+
+                <div class="topic">အဖြေမှန်ကိုရွေးပါ</div>
+
+                <div class="photo-box">
+
+                    <!-- WRONG -->
+                    <div class="choice">
+                        <img src="3.jpg">
+
+                        <button class="btn" onclick="wrongAnswer('msg2')">
+                            Choose
+                        </button>
+                    </div>
+
+                    <!-- CORRECT -->
+                    <div class="choice">
+                        <img src="4.jpg">
+
+                        <button class="btn" onclick="nextPage(3)">
+                            Choose
+                        </button>
+                    </div>
+
+                </div>
+
+                <div class="question">
+                    ဂျိုပေါက်နေသောသတ္တဝါအားရွေးပါ
+                </div>
+
+                <div class="message" id="msg2"></div>
+
             </div>
+
+        </div>
+
+        <!-- PAGE 3 -->
+        <div class="page" id="page3">
+
+            <div class="card">
+
+                <div class="topic">အဖြေမှန်ကိုရွေးပါ</div>
+
+                <div class="photo-box">
+
+                    <!-- CORRECT -->
+                    <div class="choice">
+                        <img src="5.jpg">
+
+                        <button class="btn" onclick="nextPage(4)">
+                            Choose
+                        </button>
+                    </div>
+
+                    <!-- WRONG -->
+                    <div class="choice">
+                        <img src="6.jpg">
+
+                        <button class="btn" onclick="wrongAnswer('msg3')">
+                            Choose
+                        </button>
+                    </div>
+
+                </div>
+
+                <div class="question">
+                    ခြေများသောအကောင်ကိုရွေးပါ
+                </div>
+
+                <div class="message" id="msg3"></div>
+
+            </div>
+
+        </div>
+
+        <!-- PAGE 4 -->
+        <div class="page" id="page4">
+
+            <div class="card">
+
+                <div class="topic">အဖြေမှန်ကိုရွေးပါ</div>
+
+                <div class="photo-box">
+
+                    <!-- WRONG -->
+                    <div class="choice">
+                        <img src="7.jpg">
+
+                        <button class="btn" onclick="wrongAnswer('msg4')">
+                            Choose
+                        </button>
+                    </div>
+
+                    <!-- CORRECT -->
+                    <div class="choice">
+                        <img src="8.jpg">
+
+                        <button class="btn" onclick="nextPage(5)">
+                            Choose
+                        </button>
+                    </div>
+
+                </div>
+
+                <div class="question">
+                    ပေါင်းစပ်လို့မရတဲ့အရာနှစ်ခုကိုရွေးပါ
+                </div>
+
+                <div class="message" id="msg4"></div>
+
+            </div>
+
+        </div>
+
+        <!-- PAGE 5 -->
+        <div class="page" id="page5">
+
+            <div class="card finish">
+
+                <h1>✉️အမှာစာ ✉️</h1>
+
+                <p>
+                    ချစ်တယ်ဆိုပြီး ယုံခဲ့မိတာတွေလည်း တို့အမှားပါ
+                    မချစ်ဘူးဆိုတာသိရက်နဲ့ရှေ့တိုးမိတာလည်း တို့အမှားပါ
+                    အရာရာတို့အမှားသာဖြစ်လို့ နောက်လူရင်မှာပျော်ပါစေလို့ ဆုတောင်းပေးပါတယ်
+                </p>
+
+                <button class="restart-btn" onclick="restartQuiz()">
+                    Restart
+                </button>
+
+            </div>
+
         </div>
 
     </div>
 
     <script>
 
-        const hearts = ["❤️", "💖", "💕", "💘", "💝", "💞", "🩷"];
-        const animations = ["fly1", "fly2", "fly3", "fly4"];
+        function nextPage(pageNumber) {
 
-        function createHeart() {
-            const heart = document.createElement("div");
-            heart.classList.add("flying-heart");
+            let pages = document.querySelectorAll('.page');
 
-            heart.innerHTML = hearts[Math.floor(Math.random() * hearts.length)];
+            pages.forEach(page => {
+                page.classList.remove('active');
+            });
 
-            heart.style.fontSize = (14 + Math.random() * 25) + "px";
-            heart.style.left = Math.random() * 100 + "vw";
-            heart.style.top = Math.random() * 100 + "vh";
-
-            heart.style.animation =
-                animations[Math.floor(Math.random() * animations.length)] +
-                " " + (5 + Math.random() * 4) + "s linear";
-
-            document.body.appendChild(heart);
-
-            setTimeout(() => heart.remove(), 9000);
+            document.getElementById('page' + pageNumber).classList.add('active');
         }
 
-        /* ONLY 10 HEARTS */
-        for (let i = 0; i < 10; i++) {
-            setTimeout(createHeart, i * 200);
+        function wrongAnswer(messageId) {
+
+            document.getElementById(messageId).innerHTML = "❌ Wrong Answer! Try Again!";
+        }
+
+        function restartQuiz() {
+
+            let pages = document.querySelectorAll('.page');
+
+            pages.forEach(page => {
+                page.classList.remove('active');
+            });
+
+            document.getElementById('page1').classList.add('active');
+
+            let messages = document.querySelectorAll('.message');
+
+            messages.forEach(msg => {
+                msg.innerHTML = "";
+            });
         }
 
     </script>
